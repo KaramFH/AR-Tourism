@@ -46,8 +46,8 @@ public class MainActivity extends AppCompatActivity {
 
             RequestBody body
                     = new FormBody.Builder()
-                    .add("username", username)
-                    .add("password", password)
+                    .add("username", "karam")
+                    .add("password", "123456")
                     .build();
 
             RequestBody requestBody = new MultipartBody.Builder()
@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
                     .build();
 
             Request request = new Request.Builder().url("http://10.0.2.2:5000/login")
-                    .post(body)
+                    .post(requestBody)
                     .build();
 
             okHttpClient.newCall(request).enqueue(new Callback() {
@@ -79,34 +79,40 @@ public class MainActivity extends AppCompatActivity {
                     String jsonData = response.body().string();
                     try {
                         JSONObject data = new JSONObject(jsonData);
-                        String token = data.getString("token");
 
-                        Log.v("fefe",token);
+                        if (data.getString("message").equals("User does not exist!")) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getApplicationContext(), "Username does not exist", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+
+                        else if (data.getString("message").equals("Wrong password!")) {
+                            runOnUiThread(new Runnable() {
+                                @Override
+                                public void run() {
+                                    Toast.makeText(getApplicationContext(), "Wrong password!", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+
+                        else{
+                            String token = data.getString("token");
+                        }
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
-
-//                    System.out.println(response.body().string());
-
-//                    if (response.body().string().equals("token")) {
-//                        Log.d("fefe","wlak token ya hbb");
-//                        runOnUiThread(new Runnable() {
-//                            @Override
-//                            public void run() {
-//                                Toast.makeText(getApplicationContext(), "data received", Toast.LENGTH_SHORT).show();
-//                            }
-//                        });
-//                    }
                 }
             });
-
-
-
-
-
         }
+    }
+
+    public void register(View v){
 
     }
+
+
 }

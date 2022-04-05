@@ -2,6 +2,7 @@ package com.example.fyp;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +26,8 @@ import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
 
+    String token;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,11 +47,6 @@ public class MainActivity extends AppCompatActivity {
         else{
             OkHttpClient okHttpClient = new OkHttpClient();
 
-            RequestBody body
-                    = new FormBody.Builder()
-                    .add("username", "karam")
-                    .add("password", "123456")
-                    .build();
 
             RequestBody requestBody = new MultipartBody.Builder()
                     .setType(MultipartBody.FORM)
@@ -98,20 +96,46 @@ public class MainActivity extends AppCompatActivity {
                             });
                         }
 
-                        else{
-                            String token = data.getString("token");
-                        }
+//                        else{
+//                            String toen = data.getString("token");
+//                            Log.v("token",toen);
+////                            Intent i =  new Intent(this, HomePage.class);
+////                            startActivity(i);
+//                        }
 
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
+
+                    try{
+                        JSONObject data = new JSONObject(jsonData);
+                        token = data.getString("token");
+                        Log.v("token",token);
+                    }catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
                 }
+
             });
+
+            try {
+                if (token.length() != 0) {
+
+                    Intent i = new Intent(this, HomePage.class);
+                    startActivity(i);
+
+                }
+            }
+            catch(Exception e){
+
+            }
         }
     }
 
     public void register(View v){
-
+        Intent i =  new Intent(this, Register.class);
+        startActivity(i);
     }
 
 

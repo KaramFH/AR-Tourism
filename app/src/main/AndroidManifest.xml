@@ -14,6 +14,9 @@
         android:theme="@style/Theme.AppCompat"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".HomePage"
+            android:exported="false" />
+        <activity
             android:name=".Register"
             android:exported="false" />
         <activity

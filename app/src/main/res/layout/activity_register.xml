@@ -5,89 +5,143 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Register">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        tools:context=".RegisterFragment">
+
+    <TextView
+        android:id="@+id/tv_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/register"
+        android:textAlignment="center"
+        android:textSize="50sp"
+        android:layout_marginStart="25dp"
+        android:layout_marginBottom="5dp"
+        android:layout_marginTop="60dp"
+        android:gravity="center_horizontal"
+        android:layout_marginLeft="25dp" />
+
+    <TextView
+        android:id="@+id/tv_subtitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/details"
+        android:textSize="17sp"
+        android:layout_marginStart="25dp"
+        android:layout_marginBottom="50dp"
+        android:layout_marginLeft="25dp" />
 
     <EditText
         android:id="@+id/r_username"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="97dp"
-        android:layout_marginTop="135dp"
-        android:layout_marginEnd="104dp"
-        android:layout_marginBottom="28dp"
-        android:ems="10"
-        android:hint="username"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/et_custom"
+        android:hint="@string/username"
+        android:textColor="@android:color/black"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/r_email"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:padding="15dp"
+        android:textSize="15sp"
+        android:importantForAutofill="no" />
 
     <EditText
         android:id="@+id/r_email"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="97dp"
-        android:layout_marginEnd="104dp"
-        android:layout_marginBottom="35dp"
-        android:ems="10"
-        android:hint="email"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:hint="@string/e_mail"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:padding="15dp"
         android:inputType="textEmailAddress"
-        app:layout_constraintBottom_toTopOf="@+id/r_firstname"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textColor="@android:color/black"
+        android:background="@drawable/et_custom"
+        android:textSize="15sp" />
 
     <EditText
         android:id="@+id/r_firstname"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="99dp"
-        android:layout_marginEnd="102dp"
-        android:layout_marginBottom="42dp"
-        android:ems="10"
-        android:hint="first name"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/et_custom"
+        android:hint="@string/firstname"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/r_lastname"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:textColor="@android:color/black"
+
+        android:padding="15dp"
+        android:textSize="15sp" />
 
     <EditText
         android:id="@+id/r_lastname"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="100dp"
-        android:layout_marginEnd="101dp"
-        android:layout_marginBottom="34dp"
-        android:ems="10"
-        android:hint="last name"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:layout_marginBottom="10dp"
+        android:background="@drawable/et_custom"
+        android:hint="@string/lastname"
+        android:textColor="@android:color/black"
         android:inputType="textPersonName"
-        app:layout_constraintBottom_toTopOf="@+id/r_password"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        android:padding="15dp"
+        android:textSize="15sp" />
 
-    <EditText
-        android:id="@+id/r_password"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="98dp"
-        android:layout_marginEnd="103dp"
-        android:layout_marginBottom="33dp"
-        android:ems="10"
-        android:hint="password"
-        android:inputType="textPassword"
-        app:layout_constraintBottom_toTopOf="@+id/bottom_signup"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="280dp"
+        android:layout_weight="1">
 
-    <Button
-        android:id="@+id/bottom_signup"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="143dp"
-        android:layout_marginEnd="180dp"
-        android:layout_marginBottom="152dp"
-        android:onClick="signup"
-        android:text="SignUp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        <EditText
+            android:id="@+id/r_password"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="10dp"
+            android:background="@drawable/et_custom"
+            android:hint="@string/password"
+            android:textColor="@android:color/black"
+            android:inputType="textPassword"
+            android:padding="15dp"
+            android:textSize="15sp" />
+
+        <Button
+            android:id="@+id/bottom_signup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="30dp"
+            android:onClick="signup"
+            android:background="@drawable/btn_custom"
+            android:text="@string/register"
+            android:textColor="@android:color/white" />
+
+
+
+        <EditText
+            android:id="@+id/et_error"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginStart="10dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginBottom="54dp"
+            android:ems="10"
+            android:inputType="textShortMessage"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1" />
+
+
+    </RelativeLayout>
+
+    </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

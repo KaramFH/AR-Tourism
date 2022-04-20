@@ -1,3 +1,13 @@
 <resources>
-    <string name="app_name">FYP</string>
+    <string name="login">Login</string>
+    <string name="password">Password</string>
+    <string name="e_mail">Email</string>
+    <string name="tag">The Guide for Your Every Need</string>
+    <string name="title">Tourist Agent</string>
+    <string name="details">Enter Your Details</string>
+    <string name="register">Register</string>
+    <string name="your_name">Full Name</string>
+    <string name="username">Username</string>
+    <string name="firstname">First Name</string>
+    <string name="lastname">Last Name</string>
 </resources>

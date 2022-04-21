@@ -6,8 +6,7 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:tools="http://schemas.android.com/tools"
+    <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         >
@@ -42,24 +41,24 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"
             android:background="@drawable/et_custom"
-            android:textColor="@android:color/black"
             android:hint="Username"
             android:inputType="textEmailAddress"
             android:padding="15dp"
+            android:textColor="@android:color/black"
             android:textSize="15sp" />
 
         <EditText
             android:id="@+id/password"
             android:layout_width="match_parent"
             android:layout_height="50dp"
-            android:hint="Password"
-            android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:layout_marginTop="10dp"
-            android:padding="15dp"
-            android:inputType="textPassword"
             android:layout_centerInParent="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
             android:background="@drawable/et_custom"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:padding="15dp"
             android:textSize="15sp" />
 
         <Button
@@ -67,14 +66,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/password"
-            android:background="@drawable/btn_custom"
             android:layout_marginLeft="20dp"
-            android:layout_marginRight="20dp"
-            android:onClick="login"
             android:layout_marginTop="15dp"
-            android:textColor="@android:color/white"
-            android:text="Login"/>
-
+            android:layout_marginRight="20dp"
+            android:background="@drawable/btn_custom"
+            android:onClick="login"
+            android:text="Login"
+            android:textColor="@android:color/white" />
 
 
         <TextView
@@ -88,6 +86,21 @@
             android:layout_marginLeft="39dp"
             android:layout_marginBottom="236dp"
             android:text="" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="15dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="201dp"
+            android:background="@drawable/btn_custom"
+            android:onClick="register"
+            android:text="register"
+            android:textColor="@android:color/white" />
+
 
     </RelativeLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

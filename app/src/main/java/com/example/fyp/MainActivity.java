@@ -96,13 +96,6 @@ public class MainActivity extends AppCompatActivity {
                             });
                         }
 
-//                        else{
-//                            String toen = data.getString("token");
-//                            Log.v("token",toen);
-////                            Intent i =  new Intent(this, HomePage.class);
-////                            startActivity(i);
-//                        }
-
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

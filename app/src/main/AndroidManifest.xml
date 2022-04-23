@@ -16,6 +16,7 @@
         <activity
             android:name=".HomePage"
             android:exported="false" />
+        
         <activity
             android:name=".Register"
             android:exported="false" />
@@ -31,6 +32,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBbsKKy1Wld02EjD0njLRk_mPoR7ZRPb20"/>
+
     </application>
 
 </manifest>

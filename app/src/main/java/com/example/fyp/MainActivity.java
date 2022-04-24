@@ -1,15 +1,19 @@
 package com.example.fyp;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
@@ -27,7 +31,7 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class MainActivity extends AppCompatActivity {
-
+    BottomNavigationView bnv;
     String token;
 
     @Override
@@ -120,8 +124,23 @@ public class MainActivity extends AppCompatActivity {
             try {
                 if (token.length() != 0) {
 
-                    Intent i = new Intent(this, HomePage.class);
-                    startActivity(i);
+                    setContentView(R.layout.activity_homepage);
+
+                    MapsFragment mp = new MapsFragment();
+                    bnv = findViewById(R.id.bottom_nav);
+
+                    bnv.setOnItemSelectedListener(item -> {
+                            switch (item.getItemId()) {
+                                case R.id.nav_home:
+                                    getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, mp).commit();
+                                    return true;
+
+                                case R.id.nav_feed:
+                                    return true;
+
+                            }
+                        return true;
+                    });
 
                 }
             }
@@ -134,6 +153,7 @@ public class MainActivity extends AppCompatActivity {
     public void register(View v){
         Intent i =  new Intent(this, Register.class);
         startActivity(i);
+
     }
 
 

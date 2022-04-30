@@ -2,6 +2,7 @@ package com.example.fyp;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -11,15 +12,19 @@ import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.android.gms.maps.SupportMapFragment;
+//import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CountDownLatch;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -34,12 +39,73 @@ public class MainActivity extends AppCompatActivity {
     BottomNavigationView bnv;
     String token;
 
+    List<String> bodies = new ArrayList<>();
+    List<String> users = new ArrayList<>();
+    List<String> dates = new ArrayList<>();
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
 
+
+    }
+
+    protected void get_posts(){
+
+        OkHttpClient okHttpClient = new OkHttpClient();
+
+        Request request = new Request.Builder().url("http://10.0.2.2:5000/get_posts")
+                .header("x-access-token",token).get()
+                .build();
+
+        CountDownLatch countDownLatch = new CountDownLatch(1);
+        okHttpClient.newCall(request).enqueue(new Callback() {
+            @Override
+            public void onFailure(
+                    @NotNull Call call,
+                    @NotNull IOException e) {
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(), "server down", Toast.LENGTH_SHORT).show();
+                    }
+                });
+                countDownLatch.countDown();
+            }
+            @Override
+            public void onResponse(@NotNull Call call, @NotNull Response response) throws IOException {
+
+                String jsonData = response.body().string();
+                try {
+                    JSONArray data = new JSONArray(jsonData);
+
+                    for (int i =0; i<data.length();i++){
+                        JSONObject obj = data.getJSONObject(i);
+                        Log.v("bod",obj.getString("post_body"));
+                        bodies.add(obj.getString("post_body"));
+                        users.add(obj.getString("username"));
+                        dates.add(obj.getString("date"));
+
+                    }
+
+                } catch (JSONException e) {
+
+                    e.printStackTrace();
+                }
+                countDownLatch.countDown();
+
+            }
+
+        });
+
+        try {
+            countDownLatch.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
 
     }
 
@@ -127,6 +193,9 @@ public class MainActivity extends AppCompatActivity {
                     setContentView(R.layout.activity_homepage);
 
                     MapsFragment mp = new MapsFragment();
+                    get_posts();
+
+                    Fragment rf = new RecycleFragment().newInstance(bodies,users,dates);
                     bnv = findViewById(R.id.bottom_nav);
 
                     bnv.setOnItemSelectedListener(item -> {
@@ -136,6 +205,8 @@ public class MainActivity extends AppCompatActivity {
                                     return true;
 
                                 case R.id.nav_feed:
+                                    getSupportFragmentManager().beginTransaction().replace(R.id.flFragment,rf).commit();
+
                                     return true;
 
                             }

@@ -5,6 +5,7 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
+import android.view.InflateException;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,7 +20,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.ArrayList;
 
 public class MapsFragment extends Fragment {
-
+    private SupportMapFragment mapFragment;
+    private static View view;
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
         /**
@@ -38,30 +40,46 @@ public class MapsFragment extends Fragment {
             LatLng hamra = new LatLng(33.8966, 35.4823);
 
             googleMap.addMarker(new MarkerOptions().position(jeitta).title("Jeitta Grotto"));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLng(jeitta));
             googleMap.addMarker(new MarkerOptions().position(jbeil).title("Jbeil"));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLng(jbeil));
             googleMap.addMarker(new MarkerOptions().position(hamra).title("Hamra"));
-            googleMap.moveCamera(CameraUpdateFactory.newLatLng(hamra));
+            googleMap.animateCamera((CameraUpdateFactory.newLatLng(jeitta)));
         }
     };
-    private ArrayList<LatLng> latLngArrayList;
-    private ArrayList<String> locationNameArraylist;
+
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.activity_maps, container, false);
+        if (view != null) {
+            ViewGroup parent = (ViewGroup) view.getParent();
+            if (parent != null)
+                parent.removeView(view);
+        }
+
+        try {
+            view = inflater.inflate(R.layout.activity_maps, container, false);
+        }
+        catch (InflateException e) {}
+        return view;
     }
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        SupportMapFragment mapFragment =
+         mapFragment =
                 (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
         if (mapFragment != null) {
             mapFragment.getMapAsync(callback);
         }
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        if (mapFragment != null)
+            getChildFragmentManager().beginTransaction().remove(mapFragment).commit();
+
     }
 }

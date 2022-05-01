@@ -47,11 +47,25 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_homepage);
+        MapsFragment mp = new MapsFragment();
+        bnv = findViewById(R.id.bottom_nav);
+        bnv.setOnItemSelectedListener(item -> {
+            switch (item.getItemId()) {
+                case R.id.nav_home:
+                    getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, mp).commit();
+                    return true;
+
+                case R.id.nav_feed:
+
+                    return true;
+
+            }
+            return true;
 
 
 
-    }
+    });}
 
     protected void get_posts(){
 
@@ -197,7 +211,7 @@ public class MainActivity extends AppCompatActivity {
 
                     Fragment rf = new RecycleFragment().newInstance(bodies,users,dates);
                     bnv = findViewById(R.id.bottom_nav);
-
+                    bnv.setSelectedItemId(R.id.nav_home);
                     bnv.setOnItemSelectedListener(item -> {
                             switch (item.getItemId()) {
                                 case R.id.nav_home:

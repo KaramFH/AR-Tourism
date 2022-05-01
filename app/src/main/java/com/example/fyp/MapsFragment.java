@@ -14,6 +14,8 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptor;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 
@@ -41,8 +43,12 @@ public class MapsFragment extends Fragment {
 
             googleMap.addMarker(new MarkerOptions().position(jeitta).title("Jeitta Grotto"));
             googleMap.addMarker(new MarkerOptions().position(jbeil).title("Jbeil"));
-            googleMap.addMarker(new MarkerOptions().position(hamra).title("Hamra"));
+            googleMap.addMarker(new MarkerOptions().alpha(1.0f)
+                    .position(hamra)
+                    .title("Hello Google Maps!")
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)));
             googleMap.animateCamera((CameraUpdateFactory.newLatLng(jeitta)));
+
         }
     };
 
@@ -69,6 +75,7 @@ public class MapsFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
          mapFragment =
                 (SupportMapFragment) getChildFragmentManager().findFragmentById(R.id.map);
+
         if (mapFragment != null) {
             mapFragment.getMapAsync(callback);
         }

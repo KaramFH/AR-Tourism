@@ -196,6 +196,7 @@ public class MainActivity extends AppCompatActivity {
 
                     bnv = findViewById(R.id.bottom_nav);
                     bnv.getMenu().findItem(R.id.nav_home).setChecked(true);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, mp).commit();
                     bnv.setOnItemSelectedListener(item -> {
                             switch (item.getItemId()) {
                                 case R.id.nav_home:
@@ -207,6 +208,11 @@ public class MainActivity extends AppCompatActivity {
 
                                     Fragment rf = new RecycleFragment().newInstance(bodies,users,dates);
                                     getSupportFragmentManager().beginTransaction().replace(R.id.flFragment,rf).commit();
+
+                                    bodies = new ArrayList<>();
+                                    users = new ArrayList<>();
+                                    dates = new ArrayList<>();
+
 
                                     return true;
 

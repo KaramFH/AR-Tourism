@@ -193,11 +193,10 @@ public class MainActivity extends AppCompatActivity {
                     setContentView(R.layout.activity_homepage);
 
                     MapsFragment mp = new MapsFragment();
-                    get_posts();
 
-                    Fragment rf = new RecycleFragment().newInstance(bodies,users,dates);
                     bnv = findViewById(R.id.bottom_nav);
                     bnv.getMenu().findItem(R.id.nav_home).setChecked(true);
+                    getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, mp).commit();
                     bnv.setOnItemSelectedListener(item -> {
                             switch (item.getItemId()) {
                                 case R.id.nav_home:
@@ -205,12 +204,17 @@ public class MainActivity extends AppCompatActivity {
                                     return true;
 
                                 case R.id.nav_feed:
+                                    get_posts();
+
+                                    Fragment rf = new RecycleFragment().newInstance(bodies,users,dates);
                                     getSupportFragmentManager().beginTransaction().replace(R.id.flFragment,rf).commit();
+
+                                    bodies = new ArrayList<>();
+                                    users = new ArrayList<>();
+                                    dates = new ArrayList<>();
+
+
                                     return true;
-
-                                case R.id.nav_profile:
-                                    getSupportFragmentManager().beginTransaction().replace(R.id.flFragment,rf).commit();
-
 
                             }
                         return true;

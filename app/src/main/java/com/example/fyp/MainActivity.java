@@ -206,8 +206,11 @@ public class MainActivity extends AppCompatActivity {
 
                                 case R.id.nav_feed:
                                     getSupportFragmentManager().beginTransaction().replace(R.id.flFragment,rf).commit();
-
                                     return true;
+
+                                case R.id.nav_profile:
+                                    getSupportFragmentManager().beginTransaction().replace(R.id.flFragment,rf).commit();
+
 
                             }
                         return true;

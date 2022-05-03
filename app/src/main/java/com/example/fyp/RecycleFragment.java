@@ -1,5 +1,6 @@
 package com.example.fyp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -126,6 +127,8 @@ public class RecycleFragment extends Fragment {
             return mList.size();
         }
     }
+
+
 
 
 

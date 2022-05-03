@@ -193,7 +193,7 @@ public class MainActivity extends AppCompatActivity {
                     setContentView(R.layout.activity_homepage);
 
                     MapsFragment mp = new MapsFragment();
-
+                    CollectionsFragment cf = new CollectionsFragment();
                     bnv = findViewById(R.id.bottom_nav);
                     bnv.getMenu().findItem(R.id.nav_home).setChecked(true);
                     getSupportFragmentManager().beginTransaction().replace(R.id.flFragment, mp).commit();
@@ -213,6 +213,12 @@ public class MainActivity extends AppCompatActivity {
                                     users = new ArrayList<>();
                                     dates = new ArrayList<>();
 
+
+                                    return true;
+                                case R.id.nav_profile:
+                                    get_posts();
+
+                                    getSupportFragmentManager().beginTransaction().replace(R.id.flFragment,cf).commit();
 
                                     return true;
 
